@@ -4,7 +4,8 @@ import 'package:led_demo_stateful/utilities/constants.dart';
 
 
 class InputStatusIndicator extends StatefulWidget {
-  const InputStatusIndicator({super.key});
+  final GpioService _gpioService = GpioService();
+   InputStatusIndicator({super.key});
 
   @override
   State<InputStatusIndicator> createState() => _InputStatusIndicatorState();
@@ -20,6 +21,7 @@ class _InputStatusIndicatorState extends State<InputStatusIndicator> {
     _gpioService.startInputPolling((newState) {
       setState(() {
         _isInputDetected = newState;
+        _gpioService.setLedState(newState);
       });
     });
   }

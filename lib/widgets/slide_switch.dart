@@ -14,7 +14,7 @@ class SlideSwitch extends StatefulWidget {
 
 class _SlideSwitchState extends State<SlideSwitch> {
   final PwmService _pwmService = PwmService();
-  double _pwmValue = 50.0; // Default at 50%
+  double _pwmValue = 0.0; // Default at 50%
 
   void _updatePwmValue(double value) {
     setState(() {

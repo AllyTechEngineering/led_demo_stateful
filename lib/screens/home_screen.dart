@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   ToggleSwitch(),
                   SizedBox(height: 20),
                   InputStatusIndicator(),

@@ -12,7 +12,7 @@ class ToggleSwitch extends StatefulWidget {
 
 class _ToggleSwitchState extends State<ToggleSwitch> {
   final PwmService _pwmService = PwmService();
-  bool _isOn = false;
+  bool _isOn = true;
 
   void _togglePower() {
     setState(() {

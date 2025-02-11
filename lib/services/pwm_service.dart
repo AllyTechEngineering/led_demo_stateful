@@ -81,7 +81,7 @@ class PwmService {
   // Add all the enabled pwms to the dispose method
   void dispose() {
     pwm0.disable();
-    pwm0.dispose();
+    // pwm0.dispose();
     debugPrint('PWM resources released');
   }
 } // End of class PwmService
