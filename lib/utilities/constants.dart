@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -12,8 +11,22 @@ class Constants {
   static const int kPollingDuration = 1000; // Polling duration in milliseconds
   static const double kWidth = 200.0; // Width of container
   static const double kHeight = 150.0; // Height of container
-  static const double kSizedBoxHeight= 300.0;
-  static const double kSizedBoxWidth= 800.0;
-  static const Color kColorTrue = Colors.green; 
+  static const double kSizedBoxHeight = 300.0;
+  static const double kSizedBoxWidth = 800.0;
+  static const Color kColorTrue = Colors.green;
   static const Color kColorFalse = Colors.red;
+  // theme constants
+  static const double kToolbarTextStyle = 16.0;
+  static const double kTitleTextStyle = 16.0;
+  static const double kActionsIconThemeIconSize = 24.0;
+  static const double kBodyLargeFontSize = 18.0;
+  static const double kBodyMediumFontSize = 18.0;
+  static const double kBodySmallFontSize = 18.0;
+  static const double kDisplayLargeFontSize = 18.0;
+  static const double kDisplayMediumFontSize = 18.0;
+  static const double kDisplaySmallFontSize = 18.0;
+  static const double kTitleLargeFontSize = 18.0;
+  static const double kTitleMediumFontSize = 18.0;
+  static const double kTitleSmallFontSize = 18.0;
+  static const double kIconThemeIconSize = 24.0;
 }

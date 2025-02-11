@@ -40,6 +40,7 @@ dependencies:
   dart_periphery: ^0.9.14
   equatable: ^2.0.7
   window_manager: ^0.4.3
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

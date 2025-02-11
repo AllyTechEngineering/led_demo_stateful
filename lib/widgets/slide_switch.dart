@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/services/pwm_service.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
-import 'package:led_demo_stateful/widgets/rectangular_slider_thumb_shape.dart';
+// import 'package:led_demo_stateful/widgets/rectangular_slider_thumb_shape.dart';
 
 class SlideSwitch extends StatefulWidget {
   final bool vertical;
@@ -31,23 +31,46 @@ class _SlideSwitchState extends State<SlideSwitch> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            '${Constants.kLabel}${_pwmValue.toInt()}%',
-            style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+          Container(
+            height: 50,
+            width: double.infinity,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.green.shade900, Colors.green.shade500],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withAlpha(90), // Replaces withOpacity
+                  offset: const Offset(4, 4),
+                  blurRadius: 3,
+                ),
+              ],
+            ),
+            child: Text(
+              '${Constants.kLabel}${_pwmValue.toInt()}%',
+              style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           Expanded(
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 trackHeight: 10,
                 // thumbShape: const RectangularSliderThumbShape(),
-                thumbShape:  const RoundSliderThumbShape(enabledThumbRadius: 20),
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 20),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Colors.white,
                 inactiveTickMarkColor: Colors.black,
                 inactiveTrackColor: Colors.grey,
                 activeTrackColor: Colors.blueGrey,
-                thumbColor: Colors.deepOrangeAccent,
+                thumbColor: Colors.green.shade400,
                 valueIndicatorColor: Colors.blueGrey,
                 valueIndicatorTextStyle: const TextStyle(color: Colors.white),
               ),
