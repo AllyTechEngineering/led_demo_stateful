@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/services/gpio_service.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
-
-
+import 'package:led_demo_stateful/utilities/custom_decorations.dart';
 
 class FlashToggleSwitch extends StatefulWidget {
   const FlashToggleSwitch({super.key});
@@ -32,16 +31,16 @@ class _FlashToggleSwitchState extends State<FlashToggleSwitch> {
       width: Constants.kWidth,
       height: Constants.kHeight,
       padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: _isFlashing ? Constants.kColorTrue : Constants.kColorFalse,
-        borderRadius: BorderRadius.circular(10),
-      ),
+      decoration: CustomDecorations.gradientContainer(isActive: _isFlashing),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            _isFlashing ? '${Constants.kLabel} Flashing' : '${Constants.kLabel} Off',
-            style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+            _isFlashing
+                ? '${Constants.kLabel} Flashing'
+                : '${Constants.kLabel} Off',
+            style: const TextStyle(
+                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
           ),
           Switch(
             value: _isFlashing,

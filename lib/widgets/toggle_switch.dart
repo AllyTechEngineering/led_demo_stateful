@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/services/pwm_service.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
-
+import 'package:led_demo_stateful/utilities/custom_decorations.dart';
 
 class ToggleSwitch extends StatefulWidget {
   const ToggleSwitch({super.key});
@@ -27,10 +27,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
       width: Constants.kWidth,
       height: Constants.kHeight,
       padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: _isOn ? Constants.kColorTrue : Constants.kColorFalse,
-        borderRadius: BorderRadius.circular(10),
-      ),
+      decoration: CustomDecorations.gradientContainer(isActive: _isOn),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

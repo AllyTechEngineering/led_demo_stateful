@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/services/gpio_service.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
-
+import 'package:led_demo_stateful/utilities/custom_decorations.dart';
 
 class InputStatusIndicator extends StatefulWidget {
-   const InputStatusIndicator({super.key});
+  const InputStatusIndicator({super.key});
 
   @override
   State<InputStatusIndicator> createState() => _InputStatusIndicatorState();
@@ -37,13 +37,12 @@ class _InputStatusIndicatorState extends State<InputStatusIndicator> {
       width: Constants.kWidth,
       height: Constants.kHeight,
       alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: _isInputDetected ? Constants.kColorTrue : Constants.kColorFalse,
-        borderRadius: BorderRadius.circular(12.0),
-      ),
+      decoration:
+          CustomDecorations.gradientContainer(isActive: _isInputDetected),
       child: Text(
         _isInputDetected ? Constants.kStatusTrue : Constants.kStatusFalse,
-        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+        style: const TextStyle(
+            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
         textAlign: TextAlign.center,
       ),
     );

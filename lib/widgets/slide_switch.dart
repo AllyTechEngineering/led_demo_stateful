@@ -39,7 +39,8 @@ class _SlideSwitchState extends State<SlideSwitch> {
             child: SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 trackHeight: 10,
-                thumbShape: const RectangularSliderThumbShape(),
+                // thumbShape: const RectangularSliderThumbShape(),
+                thumbShape:  const RoundSliderThumbShape(enabledThumbRadius: 20),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
                 tickMarkShape: const RoundSliderTickMarkShape(),
                 activeTickMarkColor: Colors.white,
