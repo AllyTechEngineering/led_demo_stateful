@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/screens/home_screen.dart';
 import 'package:led_demo_stateful/services/gpio_service.dart';
 import 'package:led_demo_stateful/services/pwm_service.dart';
+import 'package:led_demo_stateful/utilities/custom_app_theme.dart';
 import 'package:window_manager/window_manager.dart';
 
-
 void main() async {
-  final PwmService pwmService = PwmService();
-  final GpioService gpioService = GpioService();
-
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Ensure GPIO and PWM services are initialized only once
+  // Initialize services once
+  final pwmService = PwmService();
+  final gpioService = GpioService();
   pwmService.initializePwmService();
   gpioService.initializeGpioService();
 
@@ -34,37 +33,22 @@ class MyWindowListener extends WindowListener {
     debugPrint("Window close detected, disposing resources...");
     pwmService.dispose();
     gpioService.dispose();
-    exit(0); // Ensure the app fully exits
+    exit(0);
   }
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   final PwmService pwmService;
   final GpioService gpioService;
 
   const MyApp({super.key, required this.pwmService, required this.gpioService});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void dispose() {
-    debugPrint('Disposing MyApp resources...');
-    widget.pwmService.dispose();
-    widget.gpioService.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'LED Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: CustomAppTheme.appTheme, // Use static theme
       home: const HomeScreen(),
     );
   }
