@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dart_periphery/dart_periphery.dart';
 import 'package:flutter/foundation.dart';
 
@@ -15,28 +17,31 @@ class PwmService {
 
   PwmService._internal() {
     try {
+      _exportPwm(); // Ensure PWM0 is available before opening it
       pwm0 = PWM(2, 0);
-      // pwm0 = PWM(0,0); //Model 4
-      // Model 5, pwm(2,0), pwm(2,1), pwm(2,2) or pwm(2,3) only these pins: 12, 13, 18 or 19
-      // Model 4B, pwm(0,0) or pwm(0,1) only 2 of these pins: 12, 13, 18 or 19
-      // Model 4B: pin assignment is set by the dtoverlay. Use sudo pinctrl to see which pins are assigned.
+      pwm0.setPeriodNs(10000000);
+      pwm0.setDutyCycleNs(0);
+      pwm0.enable();
+      pwm0.setPolarity(Polarity.pwmPolarityNormal);
       debugPrint('PwmService Initialized: ${pwm0.getPWMinfo()}');
     } catch (e) {
       debugPrint('Error initializing PwmService: $e');
     }
   }
-  void initializePwmService() {
+
+  /// Ensures PWM is exported before opening it
+  void _exportPwm() {
     try {
-      pwm0.setPeriodNs(10000000);
-      pwm0.setDutyCycleNs(0);
-      pwm0.enable();
-      pwm0.setPolarity(Polarity.pwmPolarityNormal);
-      debugPrint('PwmService configured successfully.');
+      if (!File('/sys/class/pwm/pwmchip2/pwm0').existsSync()) {
+        debugPrint('Exporting PWM0...');
+        Process.runSync('sh', ['-c', 'echo 0 > /sys/class/pwm/pwmchip2/export']);
+        sleep(Duration(milliseconds: 500)); // Wait for the system to process
+      }
     } catch (e) {
-      debugPrint('PwmService initialization error: $e');
+      debugPrint('Error exporting PWM0: $e');
     }
   }
-
+  
   void updatePwmDutyCycle(int updateDutyCycle) {
     // debugPrint(
     //     'In PwmService updatePwmDutyCycle systemOnOffSate: $systemOnOffState');
@@ -81,7 +86,7 @@ class PwmService {
   // Add all the enabled pwms to the dispose method
   void dispose() {
     pwm0.disable();
-    // pwm0.dispose();
+    pwm0.dispose();
     debugPrint('PWM resources released');
   }
 } // End of class PwmService

@@ -12,12 +12,12 @@ void main() async {
   // Initialize services once
   final pwmService = PwmService();
   final gpioService = GpioService();
-  pwmService.initializePwmService();
   gpioService.initializeGpioService();
 
-  // Initialize window_manager
+  // Ensure window_manager is initialized
   await windowManager.ensureInitialized();
-  windowManager.addListener(MyWindowListener(pwmService, gpioService));
+  final windowListener = MyWindowListener(pwmService, gpioService);
+  windowManager.addListener(windowListener);
 
   runApp(MyApp(pwmService: pwmService, gpioService: gpioService));
 }
@@ -33,6 +33,7 @@ class MyWindowListener extends WindowListener {
     debugPrint("Window close detected, disposing resources...");
     pwmService.dispose();
     gpioService.dispose();
+    windowManager.destroy;
     exit(0);
   }
 }
