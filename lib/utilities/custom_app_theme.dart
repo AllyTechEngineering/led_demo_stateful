@@ -29,10 +29,10 @@ class CustomAppTheme {
         backgroundColor: Colors.transparent,
         elevation: 15.0,
         padding: EdgeInsets.zero,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(width: 3.0, style: BorderStyle.solid),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
+        // shape: RoundedRectangleBorder(
+        //   side: const BorderSide(width: 3.0, style: BorderStyle.solid),
+        //   borderRadius: BorderRadius.circular(20.0),
+        // ),
       ),
     ),
 

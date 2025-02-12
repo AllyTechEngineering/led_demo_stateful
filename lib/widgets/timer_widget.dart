@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/services/timer_service.dart';
+import 'package:led_demo_stateful/utilities/custom_button_decorations.dart';
 
 class TimerWidget extends StatefulWidget {
   const TimerWidget({super.key});
@@ -11,7 +12,7 @@ class TimerWidget extends StatefulWidget {
 
 class _TimerWidgetState extends State<TimerWidget> {
   DateTime _startTime = DateTime.now();
-  DateTime _endTime = DateTime.now().add(const Duration(hours: 1));
+  DateTime _endTime = DateTime.now().add(const Duration(minutes: 1));
   final TimerService _timerService = TimerService();
 
   Future<void> _pickDateTime(bool isStart) async {
@@ -21,7 +22,7 @@ class _TimerWidgetState extends State<TimerWidget> {
     DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: current,
-      firstDate: DateTime(2020),
+      firstDate: DateTime(2024),
       lastDate: DateTime(2100),
     );
 
@@ -54,10 +55,19 @@ class _TimerWidgetState extends State<TimerWidget> {
   }
 
   void _confirmSelection() {
+    debugPrint('Confirming selection');
     _timerService.scheduleGpioTrigger(_startTime, _endTime);
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Timer set from $_startTime to $_endTime")),
+      SnackBar(
+          content: Text(
+              "Timer Starts: ${_formatTime(_startTime)} Ends: ${_formatTime(_endTime)}")),
     );
+  }
+
+  String _formatTime(DateTime time) {
+    return "Date: ${time.month}-${time.day}-${time.year} Time: ${time.hour.toString().padLeft(2, '0')}:"
+        "${time.minute.toString().padLeft(2, '0')}:"
+        "${time.second.toString().padLeft(2, '0')}";
   }
 
   @override
@@ -66,26 +76,47 @@ class _TimerWidgetState extends State<TimerWidget> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
+          'Select Timer',
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+        const Text(
           "Starts",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        ElevatedButton(
-          onPressed: () => _pickDateTime(true),
-          child: Text("${_startTime.year}-${_startTime.month}-${_startTime.day} ${_startTime.hour}:${_startTime.minute}"),
+        Container(
+          decoration: CustomButtonDecorations.gradientContainer(),
+          height: 50,
+          width: 150,
+          child: ElevatedButton(
+            onPressed: () => _pickDateTime(true),
+            child: Text(
+                "${_startTime.month}-${_startTime.day}-${_startTime.year} ${_startTime.hour}:${_startTime.minute}"),
+          ),
         ),
         const SizedBox(height: 20),
         const Text(
           "Ends",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        ElevatedButton(
-          onPressed: () => _pickDateTime(false),
-          child: Text("${_endTime.year}-${_endTime.month}-${_endTime.day} ${_endTime.hour}:${_endTime.minute}"),
+        Container(
+          height: 50.0,
+          width: 150.0,
+          decoration: CustomButtonDecorations.gradientContainer(),
+          child: ElevatedButton(
+            onPressed: () => _pickDateTime(false),
+            child: Text(
+                "${_endTime.month}-${_endTime.day}-${_endTime.year} ${_endTime.hour}:${_endTime.minute}"),
+          ),
         ),
         const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: _confirmSelection,
-          child: const Text("Done"),
+        Container(
+          height: 50.0,
+          width: 150.0,
+          decoration: CustomButtonDecorations.gradientContainer(),
+          child: ElevatedButton(
+            onPressed: _confirmSelection,
+            child: const Text("Done"),
+          ),
         ),
       ],
     );

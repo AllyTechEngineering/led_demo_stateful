@@ -30,7 +30,7 @@ class _FlashToggleSwitchState extends State<FlashToggleSwitch> {
     return Container(
       width: Constants.kWidth,
       height: Constants.kHeight,
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(4.0),
       decoration: CustomDecorations.gradientContainer(isActive: _isFlashing),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

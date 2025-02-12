@@ -96,10 +96,14 @@ class GpioService {
 
   // GPIO Output Control
   void toggleGpioState() {
+    debugPrint('Toggling GPIO state');
+     final
     bool newState = !gpioToggleState;
     setState("gpioToggleState", newState);
+    debugPrint('gpio5 state: $gpio5.getState');
     gpio5.write(newState);
     gpio6.write(newState);
+    debugPrint('gpio5 state: $gpio5.getState');
   }
 
   void pwmMotorServiceDirection() {

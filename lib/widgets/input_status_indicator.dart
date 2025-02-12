@@ -33,17 +33,21 @@ class _InputStatusIndicatorState extends State<InputStatusIndicator> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Constants.kWidth,
-      height: Constants.kHeight,
-      alignment: Alignment.center,
-      decoration:
-          CustomDecorations.gradientContainer(isActive: _isInputDetected),
-      child: Text(
-        _isInputDetected ? Constants.kStatusTrue : Constants.kStatusFalse,
-        style: const TextStyle(
-            fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
-        textAlign: TextAlign.center,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: Constants.kWidth,
+        height: Constants.kHeight,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(4.0),
+        decoration:
+            CustomDecorations.gradientContainer(isActive: _isInputDetected),
+        child: Text(
+          _isInputDetected ? Constants.kStatusTrue : Constants.kStatusFalse,
+          style: const TextStyle(
+              fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }

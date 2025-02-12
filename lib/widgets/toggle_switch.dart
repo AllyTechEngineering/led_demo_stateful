@@ -23,23 +23,26 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: Constants.kWidth,
-      height: Constants.kHeight,
-      padding: const EdgeInsets.all(16.0),
-      decoration: CustomDecorations.gradientContainer(isActive: _isOn),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _isOn ? Constants.kOn : Constants.kOff,
-            style: const TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          Switch(
-            value: _isOn,
-            onChanged: (_) => _togglePower(),
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Container(
+        width: Constants.kWidth,
+        height: Constants.kHeight,
+        padding: const EdgeInsets.all(4.0),
+        decoration: CustomDecorations.gradientContainer(isActive: _isOn),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              _isOn ? Constants.kOn : Constants.kOff,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            Switch(
+              value: _isOn,
+              onChanged: (_) => _togglePower(),
+            ),
+          ],
+        ),
       ),
     );
   }
