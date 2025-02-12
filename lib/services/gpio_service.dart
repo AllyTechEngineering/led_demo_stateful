@@ -65,15 +65,16 @@ class GpioService {
       debugPrint('gpip initialization failed: $e');
     }
   }
+
   void checkBuildMode() {
-  if (kDebugMode) {
-    debugPrint('Running in debug mode');
-  } else if (kReleaseMode) {
-    debugPrint('Running in release mode');
-  } else if (kProfileMode) {
-    debugPrint('Running in profile mode');
+    if (kDebugMode) {
+      debugPrint('Running in debug mode');
+    } else if (kReleaseMode) {
+      debugPrint('Running in release mode');
+    } else if (kProfileMode) {
+      debugPrint('Running in profile mode');
+    }
   }
-}
 
   // GPIO Input Polling
   void startInputPolling(Function(bool) onData) {
@@ -96,14 +97,15 @@ class GpioService {
 
   // GPIO Output Control
   void toggleGpioState() {
-    debugPrint('Toggling GPIO state');
-     final
-    bool newState = !gpioToggleState;
+    final bool newState = !gpioToggleState;
     setState("gpioToggleState", newState);
-    debugPrint('gpio5 state: $gpio5.getState');
     gpio5.write(newState);
     gpio6.write(newState);
-    debugPrint('gpio5 state: $gpio5.getState');
+  }
+
+  void setRelayState(bool state) {
+    gpio5.write(state);
+    debugPrint('Relay GPIO 5 set to: $state');
   }
 
   void pwmMotorServiceDirection() {

@@ -5,7 +5,8 @@ import 'package:led_demo_stateful/services/gpio_service.dart';
 class TimerService {
   static final TimerService _instance = TimerService._internal();
   final GpioService _gpioService = GpioService();
-  Timer? _timer;
+  Timer? _startTimer;
+  Timer? _endTimer;
 
   factory TimerService() => _instance;
 
@@ -14,29 +15,40 @@ class TimerService {
   void scheduleGpioTrigger(DateTime startTime, DateTime endTime) {
     debugPrint('Scheduling GPIO trigger from $startTime to $endTime');
     final now = DateTime.now();
-    debugPrint('Current time: $now');
+
+    // Cancel any existing timers
+    _startTimer?.cancel();
+    _endTimer?.cancel();
+
     if (startTime.isAfter(now)) {
-      final duration = startTime.difference(now);
-      debugPrint('Duration: $duration');
-      _timer?.cancel();
-      _timer = Timer(duration, () {
-        _gpioService.toggleGpioState();
+      final startDuration = startTime.difference(now);
+      debugPrint('Relay will turn ON in $startDuration');
+      
+      _startTimer = Timer(startDuration, () {
+        _gpioService.setRelayState(true); // Turn relay ON
         _scheduleEndTimer(endTime);
       });
+    } else {
+      debugPrint('Start time is in the past. Relay will not be scheduled.');
     }
   }
 
   void _scheduleEndTimer(DateTime endTime) {
     final now = DateTime.now();
     if (endTime.isAfter(now)) {
-      final duration = endTime.difference(now);
-      _timer = Timer(duration, () {
-        _gpioService.toggleGpioState();
+      final endDuration = endTime.difference(now);
+      debugPrint('Relay will turn OFF in $endDuration');
+
+      _endTimer = Timer(endDuration, () {
+        _gpioService.setRelayState(false); // Turn relay OFF
       });
+    } else {
+      debugPrint('End time is in the past. Relay will not be scheduled.');
     }
   }
 
-  void cancelTimer() {
-    _timer?.cancel();
+  void cancelTimers() {
+    _startTimer?.cancel();
+    _endTimer?.cancel();
   }
 }
