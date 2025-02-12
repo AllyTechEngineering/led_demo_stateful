@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:dart_periphery/dart_periphery.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
 
 class GpioService {
   static final GpioService _instance = GpioService._internal();
-  static Duration pollingDuration = const Duration(milliseconds: Constants.kPollingDuration);
+  static Duration pollingDuration =
+      const Duration(milliseconds: Constants.kPollingDuration);
   Timer? _pollingTimer;
   Timer? _flashTimer;
   late GPIO gpio5; // Output GPIO
@@ -34,7 +35,7 @@ class GpioService {
       gpio26 = GPIO(26, GPIOdirection.gpioDirIn, 0); // Binary sensor input
       gpio27 = GPIO(27, GPIOdirection.gpioDirOut, 0); // Sensor state LED
       debugPrint('GPIO Service Initialized');
-    } catch (e) {
+    } on Exception catch (e) {
       debugPrint('Error initializing GpioService: $e');
     }
   }
@@ -53,12 +54,26 @@ class GpioService {
   }
 
   void initializeGpioService() {
-    gpio5.write(false);
-    gpio6.write(false);
-    gpio22.write(false);
-    gpio26.read();
-    gpio27.write(false);
+    try {
+      checkBuildMode();
+      gpio5.write(false);
+      gpio6.write(false);
+      gpio22.write(false);
+      gpio26.read();
+      gpio27.write(false);
+    } on Exception catch (e) {
+      debugPrint('gpip initialization failed: $e');
+    }
   }
+  void checkBuildMode() {
+  if (kDebugMode) {
+    debugPrint('Running in debug mode');
+  } else if (kReleaseMode) {
+    debugPrint('Running in release mode');
+  } else if (kProfileMode) {
+    debugPrint('Running in profile mode');
+  }
+}
 
   // GPIO Input Polling
   void startInputPolling(Function(bool) onData) {
@@ -103,12 +118,13 @@ class GpioService {
     debugPrint('Relay GPIO 27 set to: $state');
   }
 
-    // Flashing LED Control
+  // Flashing LED Control
   void startFlashingLed() {
     if (isFlashing) return;
     setState("isFlashing", true);
 
-    _flashTimer = Timer.periodic(const Duration(milliseconds: Constants.kFlashRate), (_) {
+    _flashTimer =
+        Timer.periodic(const Duration(milliseconds: Constants.kFlashRate), (_) {
       gpio22.write(!gpio22.read()); // Toggle LED state
     });
   }
@@ -118,23 +134,23 @@ class GpioService {
     _flashTimer?.cancel();
     gpio22.write(false); // Ensure LED is off
   }
+
   // Disposal
   void dispose() {
-  _pollingTimer?.cancel();
-  _flashTimer?.cancel();
-  
-  gpio5.write(false);
-  gpio6.write(false);
-  gpio22.write(false);
-  gpio27.write(false);
+    _pollingTimer?.cancel();
+    _flashTimer?.cancel();
 
-  gpio5.dispose();
-  gpio6.dispose();
-  gpio22.dispose();
-  gpio26.dispose();
-  gpio27.dispose();
+    gpio5.write(false);
+    gpio6.write(false);
+    gpio22.write(false);
+    gpio27.write(false);
 
-  debugPrint('GPIO resources released');
-}
+    gpio5.dispose();
+    gpio6.dispose();
+    gpio22.dispose();
+    gpio26.dispose();
+    gpio27.dispose();
 
+    debugPrint('GPIO resources released');
+  }
 }
