@@ -78,16 +78,17 @@ class CustomAppTheme {
       displayMedium: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kDisplayMediumFontSize,
-        color: Colors.white,
+        color: Colors.black,
       ),
       displaySmall: GoogleFonts.roboto(
+        fontWeight: FontWeight.bold,
         fontSize: Constants.kDisplaySmallFontSize,
-        color: Colors.white,
+        color: Colors.black,
       ),
       titleLarge: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kTitleLargeFontSize,
-        color:Colors.white,
+        color: Colors.white,
       ),
       titleMedium: GoogleFonts.roboto(
         fontSize: Constants.kTitleMediumFontSize,
@@ -96,7 +97,7 @@ class CustomAppTheme {
       titleSmall: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kTitleSmallFontSize,
-        color: Colors.white,
+        color: Colors.black,
         //Color(0xFF176B87),
       ),
     ),
@@ -140,6 +141,67 @@ class CustomAppTheme {
         foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
         iconSize: WidgetStateProperty.all<double>(30.0),
         elevation: WidgetStateProperty.all<double>(16.0),
+      ),
+    ),
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: Color(0xFFEEEEEE),
+      dayPeriodTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF053B50),
+      ),
+      hourMinuteShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        side: BorderSide(
+          color: Colors.black,
+          width: 2.0,
+        ),
+      ),
+      dayPeriodShape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+        side: BorderSide(
+          color: Colors.black,
+          width: 2.0,
+        ),
+      ),
+      helpTextStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF053B50),
+      ),
+      
+    ),
+    datePickerTheme: const DatePickerThemeData(
+      backgroundColor: Color(0xFFEEEEEE),
+      rangePickerBackgroundColor: Color(0xFFEEEEEE),
+      rangePickerElevation: 4,
+      rangePickerShadowColor: Colors.black,
+      elevation: 4,
+      shadowColor: Colors.black,
+      dayStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+        color: Color(0xFF053B50),
+      ),
+      weekdayStyle: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.normal,
+        color: Color(0xFF053B50),
+      ),
+      yearStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+        color: Color(0xFF053B50),
+      ),
+      headerHelpStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF053B50),
+      ),
+      headerHeadlineStyle: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF053B50),
       ),
     ),
   );

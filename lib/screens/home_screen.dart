@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:led_demo_stateful/utilities/constants.dart';
+// import 'package:led_demo_stateful/utilities/constants.dart';
 // import 'package:led_demo_stateful/widgets/flash_toggle_switch.dart';
 import 'package:led_demo_stateful/widgets/input_status_indicator.dart';
 import 'package:led_demo_stateful/widgets/slider_flash.dart';
@@ -18,13 +18,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          Constants.kTitle,
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     Constants.kTitle,
+      //     style: Theme.of(context).textTheme.titleLarge,
+      //   ),
+      //   centerTitle: true,
+      // ),
       body: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [

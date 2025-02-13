@@ -32,12 +32,12 @@ class _SliderPwmState extends State<SliderPwm> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            height: 50,
-            width: double.infinity,
+            height: Constants.kSmallBoxHeight,
+            width: Constants.kSmallBoxWidth,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.green.shade900, Colors.green.shade500],
+                colors: [Constants.kColorDarkest, Constants.kColorMedium],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -67,7 +67,7 @@ class _SliderPwmState extends State<SliderPwm> {
                 inactiveTickMarkColor: Colors.black,
                 inactiveTrackColor: Colors.grey,
                 activeTrackColor: Colors.blueGrey,
-                thumbColor: Colors.green.shade400,
+                thumbColor: Constants.kColorDarkest,
                 valueIndicatorColor: Colors.blueGrey,
                 valueIndicatorTextStyle: const TextStyle(color: Colors.white),
               ),

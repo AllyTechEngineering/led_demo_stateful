@@ -49,7 +49,7 @@ class _SliderFlashState extends State<SliderFlash> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.green.shade900, Colors.green.shade500],
+                colors: [Constants.kColorDarkest, Constants.kColorMedium],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -79,7 +79,7 @@ class _SliderFlashState extends State<SliderFlash> {
                 inactiveTickMarkColor: Colors.black,
                 inactiveTrackColor: Colors.grey,
                 activeTrackColor: Colors.blueGrey,
-                thumbColor: Colors.green.shade400,
+                thumbColor: Constants.kColorDarkest,
                 valueIndicatorColor: Colors.blueGrey,
                 valueIndicatorTextStyle: const TextStyle(color: Colors.white),
               ),

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:led_demo_stateful/utilities/constants.dart';
 
 class CustomButtonDecorations {
   static BoxDecoration gradientContainer() {
     return BoxDecoration(
       gradient: LinearGradient(
-        colors: [Colors.green.shade900, Colors.green.shade500],
+        colors: [Constants.kColorDarkest, Constants.kColorMedium],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),

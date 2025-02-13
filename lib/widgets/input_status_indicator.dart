@@ -44,7 +44,7 @@ class _InputStatusIndicatorState extends State<InputStatusIndicator> {
             CustomDecorations.gradientContainer(isActive: _isInputDetected),
         child: Text(
           _isInputDetected ? Constants.kStatusTrue : Constants.kStatusFalse,
-          style: Theme.of(context).textTheme.bodySmall,
+          style: Theme.of(context).textTheme.displayLarge,
           textAlign: TextAlign.center,
         ),
       ),
