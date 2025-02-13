@@ -18,9 +18,9 @@ class _FlashToggleSwitchState extends State<FlashToggleSwitch> {
     setState(() {
       _isFlashing = !_isFlashing;
       if (_isFlashing) {
-        _gpioService.startFlashingLed();
+        _gpioService.startFlashingDevice();
       } else {
-        _gpioService.stopFlashingLed();
+        _gpioService.stopFlashingDevice();
       }
     });
   }

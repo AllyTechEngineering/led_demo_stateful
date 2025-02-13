@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
 import 'package:led_demo_stateful/widgets/flash_toggle_switch.dart';
 import 'package:led_demo_stateful/widgets/input_status_indicator.dart';
-import 'package:led_demo_stateful/widgets/slide_switch.dart';
+import 'package:led_demo_stateful/widgets/slider_pwm.dart';
 import 'package:led_demo_stateful/widgets/toggle_switch.dart';
 import 'package:led_demo_stateful/widgets/timer_widget.dart'; // New Timer Widget
 
@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SizedBox(
                 width: 100.0,
                 height: 300.0,
-                child: SlideSwitch(vertical: true),
+                child: SliderPwm(vertical: true),
               ),
             ),
           ),

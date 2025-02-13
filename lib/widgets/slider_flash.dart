@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:led_demo_stateful/services/pwm_service.dart';
+import 'package:led_demo_stateful/services/gpio_service.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
 // import 'package:led_demo_stateful/widgets/rectangular_slider_thumb_shape.dart';
 
-class SlideSwitch extends StatefulWidget {
+class SliderFlash extends StatefulWidget {
   final bool vertical;
 
-  const SlideSwitch({super.key, this.vertical = false});
+  const SliderFlash({super.key, this.vertical = false});
 
   @override
-  State<SlideSwitch> createState() => _SlideSwitchState();
+  State<SliderFlash> createState() => _SliderFlashState();
 }
 
-class _SlideSwitchState extends State<SlideSwitch> {
-  final PwmService _pwmService = PwmService();
-  double _pwmValue = 0.0; // Default at 50%
+class _SliderFlashState extends State<SliderFlash> {
+  // final PwmService _pwmService = PwmService();
+  final GpioService _gpioService = GpioService();
+
+  double _flashValue = 0.0;
 
   void _updatePwmValue(double value) {
     setState(() {
-      _pwmValue = value;
-      _pwmService.updatePwmDutyCycle(value.toInt());
+      _flashValue = value;
+      _gpioService.updateDeviceFlashRate(value);
     });
   }
 
@@ -51,7 +53,7 @@ class _SlideSwitchState extends State<SlideSwitch> {
               ],
             ),
             child: Text(
-              '${Constants.kLabel}${_pwmValue.toInt()}%',
+              '${Constants.kLabel}${_flashValue.toInt()}%',
               style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
@@ -77,11 +79,11 @@ class _SlideSwitchState extends State<SlideSwitch> {
               child: RotatedBox(
                 quarterTurns: widget.vertical ? 3 : 0,
                 child: Slider(
-                  value: _pwmValue,
+                  value: _flashValue,
                   min: 0,
                   max: 100,
                   divisions: 10,
-                  label: '${_pwmValue.toInt()}%',
+                  label: '${_flashValue.toInt()}%',
                   onChanged: _updatePwmValue,
                 ),
               ),

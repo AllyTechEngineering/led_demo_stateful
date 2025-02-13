@@ -124,21 +124,28 @@ class GpioService {
     debugPrint('Relay GPIO 27 set to: $state');
   }
 
-  // Flashing LED Control
-  void startFlashingLed() {
+  // Flashing Device Control
+  void updateDeviceFlashRate(double newFlashRate) {
+    debugPrint('Device newFlashRate: $newFlashRate');
     if (isFlashing) return;
     setState("isFlashing", true);
-
-    _flashTimer =
-        Timer.periodic(const Duration(milliseconds: Constants.kFlashRate), (_) {
+    int flashRate = (newFlashRate * 10).toInt();
+    debugPrint('Device flash rate: $flashRate');
+    _flashTimer = Timer.periodic(Duration(milliseconds: flashRate), (_) {
       gpio22.write(!gpio22.read()); // Toggle LED state
     });
   }
 
-  void stopFlashingLed() {
+  void startFlashingDevice() {
+    debugPrint('Device startFlashingDevice');
+    setState("isFlashing", true);
+  }
+
+  void stopFlashingDevice() {
+    debugPrint('Device stopFlashingDevice');
     setState("isFlashing", false);
     _flashTimer?.cancel();
-    gpio22.write(false); // Ensure LED is off
+    gpio22.write(false);
   }
 
   // Disposal
