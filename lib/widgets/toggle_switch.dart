@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// import 'package:led_demo_stateful/services/gpio_service.dart';
 import 'package:led_demo_stateful/services/pwm_service.dart';
 import 'package:led_demo_stateful/utilities/constants.dart';
 import 'package:led_demo_stateful/utilities/custom_decorations.dart';
@@ -12,12 +13,20 @@ class ToggleSwitch extends StatefulWidget {
 
 class _ToggleSwitchState extends State<ToggleSwitch> {
   final PwmService _pwmService = PwmService();
+  // final GpioService _gpioService = GpioService();
+
   bool _isOn = true;
 
   void _togglePower() {
     setState(() {
       _isOn = !_isOn;
-      _pwmService.pwmSystemOnOff();
+      if (_isOn) {
+        _pwmService.startPwm();
+        // _gpioService.startFlashingDevice();
+      } else {
+        _pwmService.stopPwm();
+        // _gpioService.stopFlashingDevice();
+      }
     });
   }
 
@@ -35,7 +44,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
           children: [
             Text(
               _isOn ? Constants.kOn : Constants.kOff,
-              style: const TextStyle(color: Colors.white, fontSize: 18),
+              style: Theme.of(context).textTheme.bodyMedium, 
             ),
             Switch(
               value: _isOn,

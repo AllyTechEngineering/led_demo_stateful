@@ -51,11 +51,8 @@ class _SliderPwmState extends State<SliderPwm> {
               ],
             ),
             child: Text(
-              '${Constants.kLabel}${_pwmValue.toInt()}%',
-              style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              '${Constants.kPwmLabel} ${_pwmValue.toInt()}%',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           Expanded(

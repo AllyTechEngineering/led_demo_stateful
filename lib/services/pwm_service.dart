@@ -43,7 +43,7 @@ class PwmService {
         debugPrint('Exporting PWM0...');
         Process.runSync(
             'sh', ['-c', 'echo 0 > /sys/class/pwm/pwmchip2/export']);
-            debugPrint('Exporting PWM1...');
+        debugPrint('Exporting PWM1...');
         Process.runSync(
             'sh', ['-c', 'echo 1 > /sys/class/pwm/pwmchip2/export']);
         sleep(Duration(milliseconds: 500)); // Wait for the system to process
@@ -70,28 +70,38 @@ class PwmService {
     }
   }
 
-  void pwmSystemOnOff() {
-    systemOnOffState = !systemOnOffState;
-    // debugPrint('In PwmService systemOnOffState: $systemOnOffState');
-    if (!systemOnOffState) {
-      pwm0.disable();
-      pwm1.disable();
-      // pwm2.disable();
-      // pwm3.disable();
-      // GpioService().setLedState(false);
-      // GpioService().setState("isPolling", false);
-      // debugPrint('In PwmService enable: ${pwm.getEnabled()}');
-    }
-    if (systemOnOffState) {
-      pwm0.enable();
-      pwm1.enable();
-      // pwm2.enable();
-      // pwm3.enable();
-      // GpioService().setLedState(true);
-      // GpioService().setState("isPolling", true);
-      // debugPrint('In PwmService enable: ${pwm.getEnabled()}');
-    }
+  void stopPwm() {
+    pwm0.disable();
+    pwm1.disable();
   }
+
+  void startPwm() {
+    pwm0.enable();
+    pwm1.enable();
+  }
+
+  // void pwmSystemOnOff() {
+  //   systemOnOffState = !systemOnOffState;
+  //   // debugPrint('In PwmService systemOnOffState: $systemOnOffState');
+  //   if (!systemOnOffState) {
+  //     pwm0.disable();
+  //     pwm1.disable();
+  //     // pwm2.disable();
+  //     // pwm3.disable();
+  //     // GpioService().setLedState(false);
+  //     // GpioService().setState("isPolling", false);
+  //     // debugPrint('In PwmService enable: ${pwm.getEnabled()}');
+  //   }
+  //   if (systemOnOffState) {
+  //     pwm0.enable();
+  //     pwm1.enable();
+  //     // pwm2.enable();
+  //     // pwm3.enable();
+  //     // GpioService().setLedState(true);
+  //     // GpioService().setState("isPolling", true);
+  //     // debugPrint('In PwmService enable: ${pwm.getEnabled()}');
+  //   }
+  // }
 
   //Disposal
   // Add all the enabled pwms to the dispose method

@@ -19,7 +19,7 @@ class CustomAppTheme {
       brightness: Brightness.light,
     ),
 
-    scaffoldBackgroundColor: const Color(0xFFE5E8E8),
+    scaffoldBackgroundColor: const Color(0xFFEFE9D5),
 
     // Elevated Button Theme
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -51,7 +51,7 @@ class CustomAppTheme {
       ),
       elevation: 4,
       centerTitle: true,
-      backgroundColor: Color(0xFF176B87),
+      backgroundColor: Color(0xFF497D74),
       foregroundColor: Colors.white,
     ),
 
@@ -64,7 +64,7 @@ class CustomAppTheme {
       bodyMedium: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kBodyMediumFontSize,
-        color: Colors.black,
+        color: Colors.white,
       ),
       bodySmall: GoogleFonts.roboto(
         fontSize: Constants.kBodySmallFontSize,
@@ -78,7 +78,7 @@ class CustomAppTheme {
       displayMedium: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kDisplayMediumFontSize,
-        color: Color(0xFF053B50),
+        color: Colors.white,
       ),
       displaySmall: GoogleFonts.roboto(
         fontSize: Constants.kDisplaySmallFontSize,
@@ -87,7 +87,7 @@ class CustomAppTheme {
       titleLarge: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kTitleLargeFontSize,
-        color: Color(0xFFE0C766),
+        color:Colors.white,
       ),
       titleMedium: GoogleFonts.roboto(
         fontSize: Constants.kTitleMediumFontSize,
@@ -96,7 +96,8 @@ class CustomAppTheme {
       titleSmall: GoogleFonts.roboto(
         fontWeight: FontWeight.bold,
         fontSize: Constants.kTitleSmallFontSize,
-        color: Color(0xFF176B87),
+        color: Colors.white,
+        //Color(0xFF176B87),
       ),
     ),
 

@@ -18,11 +18,21 @@ class _SliderFlashState extends State<SliderFlash> {
 
   double _flashValue = 0.0;
 
-  void _updatePwmValue(double value) {
+  void _updateSliderFlashRate(double value) {
     setState(() {
       _flashValue = value;
       _gpioService.updateDeviceFlashRate(value);
     });
+  }
+
+  String formatHz(double hz) {
+    if (hz >= 10) {
+      return hz.toStringAsFixed(0); // Show whole number Hz if ≥ 10
+    } else if (hz >= 1) {
+      return hz.toStringAsFixed(2); // Show 1 decimal place if 1 ≤ Hz < 10
+    } else {
+      return hz.toStringAsFixed(2); // Show 2 decimal places if Hz < 1
+    }
   }
 
   @override
@@ -53,11 +63,8 @@ class _SliderFlashState extends State<SliderFlash> {
               ],
             ),
             child: Text(
-              '${Constants.kLabel}${_flashValue.toInt()}%',
-              style: const TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
+              '${Constants.kLabel} ${_flashValue.toInt() == 0 ? "∞" : formatHz(1000 / (_flashValue.toInt() * 10))} Hz',
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
           Expanded(
@@ -83,8 +90,8 @@ class _SliderFlashState extends State<SliderFlash> {
                   min: 0,
                   max: 100,
                   divisions: 10,
-                  label: '${_flashValue.toInt()}%',
-                  onChanged: _updatePwmValue,
+                  label: '${_flashValue.toInt() * 10}ms',
+                  onChanged: _updateSliderFlashRate,
                 ),
               ),
             ),

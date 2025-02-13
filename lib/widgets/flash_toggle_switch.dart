@@ -39,8 +39,7 @@ class _FlashToggleSwitchState extends State<FlashToggleSwitch> {
             _isFlashing
                 ? '${Constants.kLabel} Flashing'
                 : '${Constants.kLabel} Off',
-            style: const TextStyle(
-                fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodySmall,
           ),
           Switch(
             value: _isFlashing,

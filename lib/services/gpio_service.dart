@@ -22,7 +22,7 @@ class GpioService {
     "isInputDetected": false,
     "isPolling": false,
     "currentInputState": false,
-    "isFlashing": false,
+    "isFlashing": true,
   };
 
   factory GpioService() => _instance;
@@ -127,13 +127,17 @@ class GpioService {
   // Flashing Device Control
   void updateDeviceFlashRate(double newFlashRate) {
     debugPrint('Device newFlashRate: $newFlashRate');
-    if (isFlashing) return;
-    setState("isFlashing", true);
-    int flashRate = (newFlashRate * 10).toInt();
-    debugPrint('Device flash rate: $flashRate');
-    _flashTimer = Timer.periodic(Duration(milliseconds: flashRate), (_) {
-      gpio22.write(!gpio22.read()); // Toggle LED state
-    });
+    if (newFlashRate == 0 && isFlashing) {
+      stopFlashingDevice();
+    } else {
+      setState("isFlashing", true);
+      int flashRate = (newFlashRate * 10).toInt();
+      debugPrint('Device flash rate: $flashRate');
+      _flashTimer?.cancel();
+      _flashTimer = Timer.periodic(Duration(milliseconds: flashRate), (_) {
+        gpio22.write(!gpio22.read()); // Toggle LED state
+      });
+    }
   }
 
   void startFlashingDevice() {
